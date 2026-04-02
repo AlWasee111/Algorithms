@@ -44,4 +44,4 @@ void CountingSort(vector<int>& array)
 			array.push_back(i);
 		}
 	}
-}
+} 
