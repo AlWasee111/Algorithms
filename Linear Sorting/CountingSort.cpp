@@ -1,3 +1,5 @@
+//Time complexity: O(n + k) where k is the range of numbers
+
 #include <iostream>
 #include <vector>
 #include <algorithm>
