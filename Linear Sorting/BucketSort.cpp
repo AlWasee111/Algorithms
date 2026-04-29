@@ -1,4 +1,4 @@
-//TIme complexity: O(n) on average
+//Time complexity: O(n) on average
 
 #include <iostream>
 #include <vector>
@@ -6,7 +6,7 @@
 using namespace std;
 
 void BucketSort(vector<double>& array);
-void HelperInsertionSort(vector<double>& array, int value);
+void HelperInsertionSort(vector<double>& array);
 
 int main()
 {
@@ -34,8 +34,9 @@ void BucketSort(vector<double>& array)
 	{
 		int bucketNumber = (int)(size * array[i]);
 		buckets[bucketNumber].push_back(array[i]);
-		HelperInsertionSort(buckets[bucketNumber], array[i]);
 	}
+	for (int i = 0; i < size; i++)
+		HelperInsertionSort(buckets[i]);
 
 	array.resize(0);
 
@@ -50,24 +51,19 @@ void BucketSort(vector<double>& array)
 
 }
 
-void HelperInsertionSort(vector<double>& array, double value)
+void HelperInsertionSort(vector<double>& array)
 {
-	int valuePos = -1;
-
-	for (int i = array.size() - 2; i >= 0; i--)
+	for (int i = 1; i < array.size(); i++)
 	{
-		if (array[i] > value)
-			valuePos = i;
-	}
-
-	if (valuePos != -1)
-	{
-		for (int i = array.size() - 1; i > valuePos; i--)
+		if (array[i - 1] > array[i])
 		{
-			int temp = array[i];
-			array[i] = array[i - 1];
-			array[i - 1] = temp;
+			double k = array[i], j = i - 1;
+			for (;j >= 0 && array[j] > k; j--)
+			{
+				array[j + 1] = array[j];
+			}
+
+			array[j + 1] = k;
 		}
-		array[valuePos] = value;
 	}
 }
